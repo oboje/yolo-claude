@@ -8,6 +8,10 @@ status: draft
 
 A disposable Alpine container machine that runs Claude Code fully isolated from the macOS filesystem.
 
+On [apple/container](https://github.com/apple/container), Apple's containerization runtime,
+every container is a full VM rather than a shared kernel namespace: its own filesystem, no
+access to your Mac. Experiment freely.
+
 ## Why
 
 I try a lot of half-baked ideas with Claude on my main machine. Every time, I had to stop
@@ -21,25 +25,32 @@ breaks a VM disk I rebuild in eleven seconds, instead of my laptop.
 
 **Never experiment unprotected.**
 
-## Alias
-
-One-liner to get `claude3` (bash):
-
-```bash
-echo "alias claude3='\$HOME/vm/claude/up.sh'" >> ~/.bashrc && source ~/.bashrc
-```
-
-For zsh, swap the file:
-
-```bash
-echo "alias claude3='\$HOME/vm/claude/up.sh'" >> ~/.zshrc && source ~/.zshrc
-```
-
 ## Quickstart
 
-1. Download the latest signed `.pkg` from https://github.com/apple/container/releases and install it.
-2. `container system start`
-3. `./up.sh`
+1. Install [apple/container](https://github.com/apple/container/releases) from the latest
+   signed `.pkg`, then start it:
+
+   ```bash
+   container system start
+   ```
+
+2. Clone it to the path the alias expects:
+
+   ```bash
+   git clone https://github.com/oboje/yolo-claude.git ~/vm/claude
+   ```
+
+3. Add the alias:
+
+   ```bash
+   echo "alias claude3='\$HOME/vm/claude/up.sh'" >> ~/.zshrc && source ~/.zshrc
+   ```
+
+4. Run it:
+
+   ```bash
+   claude3
+   ```
 
 ## Usage
 
